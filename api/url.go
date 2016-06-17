@@ -109,7 +109,9 @@ func (u *urlBuilder) constructBasicUrl(parts ...string) string {
 		if part == "" {
 			return ""
 		}
-		buffer.WriteString("/")
+		if raw := buffer.Bytes(); raw[buffer.Len()-1] != byte('/') {
+                    buffer.WriteString("/")
+                }
 		buffer.WriteString(part)
 	}
 
